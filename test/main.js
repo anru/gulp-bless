@@ -1,6 +1,5 @@
 var bless = require('../');
 var should = require('should');
-var os = require('os');
 var fs = require('fs');
 var path = require('path');
 var File = require('gulp-util').File;
@@ -41,7 +40,7 @@ describe('gulp-bless', function() {
         });
 
         it('should split when selector count is over the limit', function(done){
-            var stream = bless();
+            var stream = bless({imports: false});
 
             fs.readFile('./test/css/long.css', function(err, data){
                 if(err) throw new Error(err);
@@ -146,7 +145,7 @@ describe('gulp-bless', function() {
         });
 
         it('should throw an error if stream is passed', function(done){
-            var stream = bless('styles.css');
+            var stream = bless();
 
             stream.on('error', function(err){
                 err.plugin.should.equal('gulp-bless');
